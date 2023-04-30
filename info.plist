@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>net.royr.alfred-connect-release-keyboard-trackpad</string>
+	<key>connections</key>
+	<dict>
+		<key>1FF17CD9-D28A-483C-9B62-5727DD640D8E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A6BB0E55-E79B-443B-8052-AA4420EBD4C9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>33CBCE2B-9F5E-423B-9339-1CC6AEFA9DA7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>77FBA10A-3C45-485D-81D3-D4507E2068D4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A6BB0E55-E79B-443B-8052-AA4420EBD4C9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BD2778D8-E2CC-4EBE-9CE7-1155563024DB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>_button1</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>33CBCE2B-9F5E-423B-9339-1CC6AEFA9DA7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>_button1</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Roy Rothenberg</string>
+	<key>description</key>
+	<string>Release or Connect to Apple Keyboard / Trackpad</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Release/Connect to Apple Keyboard / Trackpad</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Switching Keyboard &amp; Trackpad...</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>BD2778D8-E2CC-4EBE-9CE7-1155563024DB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Done Switching Keyboard &amp; Trackpad</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>77FBA10A-3C45-485D-81D3-D4507E2068D4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>262144</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>1</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>1FF17CD9-D28A-483C-9B62-5727DD640D8E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>blueutil=$(which blueutil)
+
+KEYBOARD="68-fe-f7-76-a1-27"
+TRACKPAD="ac-88-fd-ee-0d-c4"
+
+keyboard_connected=$(${blueutil} --is-connected ${KEYBOARD})
+trackpad_connected=$(${blueutil} --is-connected ${TRACKPAD})
+if [[ "$keyboard_connected" = '1' || "$trackpad_connected" = '1' ]]; then
+    ${blueutil} --unpair ${KEYBOARD}
+    ${blueutil} --unpair ${TRACKPAD}
+else
+    ${blueutil} --unpair ${KEYBOARD}
+    ${blueutil} --unpair ${TRACKPAD}
+    sleep 1
+    ${blueutil} --pair ${KEYBOARD}
+    ${blueutil} --pair ${TRACKPAD}
+    sleep 1
+    ${blueutil} --connect ${KEYBOARD}
+    ${blueutil} --connect ${TRACKPAD}
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>33CBCE2B-9F5E-423B-9339-1CC6AEFA9DA7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>button1</key>
+				<string>Ok</string>
+				<key>button2</key>
+				<string>Cancel</string>
+				<key>button3</key>
+				<string></string>
+				<key>description</key>
+				<string></string>
+				<key>title</key>
+				<string>Are you sure you want to switch inputs?</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.dialog</string>
+			<key>uid</key>
+			<string>A6BB0E55-E79B-443B-8052-AA4420EBD4C9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>1FF17CD9-D28A-483C-9B62-5727DD640D8E</key>
+		<dict>
+			<key>xpos</key>
+			<real>160</real>
+			<key>ypos</key>
+			<real>255</real>
+		</dict>
+		<key>33CBCE2B-9F5E-423B-9339-1CC6AEFA9DA7</key>
+		<dict>
+			<key>xpos</key>
+			<real>465</real>
+			<key>ypos</key>
+			<real>370</real>
+		</dict>
+		<key>77FBA10A-3C45-485D-81D3-D4507E2068D4</key>
+		<dict>
+			<key>xpos</key>
+			<real>750</real>
+			<key>ypos</key>
+			<real>235</real>
+		</dict>
+		<key>A6BB0E55-E79B-443B-8052-AA4420EBD4C9</key>
+		<dict>
+			<key>xpos</key>
+			<real>285</real>
+			<key>ypos</key>
+			<real>420</real>
+		</dict>
+		<key>BD2778D8-E2CC-4EBE-9CE7-1155563024DB</key>
+		<dict>
+			<key>xpos</key>
+			<real>435</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>webaddress</key>
+	<string>https://github.com/vuduchild/alfred-connect-release-keyboard-trackpad</string>
+</dict>
+</plist>
