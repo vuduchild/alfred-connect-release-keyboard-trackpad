@@ -94,27 +94,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string></string>
-				<key>title</key>
-				<string>Done Switching Keyboard &amp; Trackpad</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>77FBA10A-3C45-485D-81D3-D4507E2068D4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -146,49 +125,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>blueutil=$(which blueutil)
-
-KEYBOARD="68-fe-f7-76-a1-27"
-TRACKPAD="ac-88-fd-ee-0d-c4"
-
-trackpad_connected=$(${blueutil} --is-connected ${TRACKPAD})
-keyboard_connected=$(${blueutil} --is-connected ${KEYBOARD})
-
-if [[ "$keyboard_connected" = '1' || "$trackpad_connected" = '1' ]]; then
-    ${blueutil} --unpair ${TRACKPAD}
-    ${blueutil} --unpair ${KEYBOARD}
-else
-    ${blueutil} --unpair ${TRACKPAD}
-    ${blueutil} --unpair ${KEYBOARD}
-    sleep 1
-    ${blueutil} --pair ${TRACKPAD}
-    ${blueutil} --pair ${KEYBOARD}
-    sleep 1
-    ${blueutil} --connect ${TRACKPAD}
-    ${blueutil} --connect ${KEYBOARD}
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>33CBCE2B-9F5E-423B-9339-1CC6AEFA9DA7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>button1</key>
 				<string>Ok</string>
 				<key>button2</key>
@@ -207,9 +143,58 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Done Switching Keyboard &amp; Trackpad</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>77FBA10A-3C45-485D-81D3-D4507E2068D4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo $bluetooth_devices_macs | xargs -r -t -I % ./disconnect_local_bluetooth_device_and_connect_it_remotely.sh % ${remote_user} ${remote_machine}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>33CBCE2B-9F5E-423B-9339-1CC6AEFA9DA7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Discover your bluetooth devices using:
+blueutil --paired
+Setup ssh on both machines using 
+ssh-keygen -t rsa -N '' &amp;&amp; ssh-copy-id user@remote
+
+Add sshd-keygen-wrapper and alfred to bluetooth permissions on both machines</string>
 	<key>uidata</key>
 	<dict>
 		<key>1FF17CD9-D28A-483C-9B62-5727DD640D8E</key>
@@ -222,34 +207,100 @@ fi</string>
 		<key>33CBCE2B-9F5E-423B-9339-1CC6AEFA9DA7</key>
 		<dict>
 			<key>xpos</key>
-			<real>465</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>370</real>
+			<real>310</real>
 		</dict>
 		<key>77FBA10A-3C45-485D-81D3-D4507E2068D4</key>
 		<dict>
 			<key>xpos</key>
-			<real>750</real>
+			<real>660</real>
 			<key>ypos</key>
-			<real>235</real>
+			<real>310</real>
 		</dict>
 		<key>A6BB0E55-E79B-443B-8052-AA4420EBD4C9</key>
 		<dict>
 			<key>xpos</key>
-			<real>285</real>
+			<real>325</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>275</real>
 		</dict>
 		<key>BD2778D8-E2CC-4EBE-9CE7-1155563024DB</key>
 		<dict>
 			<key>xpos</key>
-			<real>435</real>
+			<real>455</real>
 			<key>ypos</key>
-			<real>150</real>
+			<real>145</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
-	<array/>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The username for the remote machine</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>remote_user</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The remote machine we're connecting the disconnected devices to</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>remote_machine</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>6</integer>
+			</dict>
+			<key>description</key>
+			<string>The mac addresses of the bluetooth devices we're connecting/disconnecting, separated by new lines. These can be found by running blueutil --paired on the command line</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>bluetooth_devices_macs</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>https://github.com/vuduchild/alfred-connect-release-keyboard-trackpad</string>
 </dict>
