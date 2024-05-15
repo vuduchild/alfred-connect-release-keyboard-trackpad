@@ -156,20 +156,21 @@
 KEYBOARD="68-fe-f7-76-a1-27"
 TRACKPAD="ac-88-fd-ee-0d-c4"
 
-keyboard_connected=$(${blueutil} --is-connected ${KEYBOARD})
 trackpad_connected=$(${blueutil} --is-connected ${TRACKPAD})
+keyboard_connected=$(${blueutil} --is-connected ${KEYBOARD})
+
 if [[ "$keyboard_connected" = '1' || "$trackpad_connected" = '1' ]]; then
-    ${blueutil} --unpair ${KEYBOARD}
     ${blueutil} --unpair ${TRACKPAD}
+    ${blueutil} --unpair ${KEYBOARD}
 else
-    ${blueutil} --unpair ${KEYBOARD}
     ${blueutil} --unpair ${TRACKPAD}
+    ${blueutil} --unpair ${KEYBOARD}
     sleep 1
-    ${blueutil} --pair ${KEYBOARD}
     ${blueutil} --pair ${TRACKPAD}
+    ${blueutil} --pair ${KEYBOARD}
     sleep 1
-    ${blueutil} --connect ${KEYBOARD}
     ${blueutil} --connect ${TRACKPAD}
+    ${blueutil} --connect ${KEYBOARD}
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
